@@ -8,20 +8,14 @@
 
 public class Primos {
   public static void main(String... args) {
-    int n = 45;
+    int n = 104297;
     boolean esPrimo = true;
-
-    int veces = 0;
 
     // Encontrar un número diferente de sí mismo y la unidad
     // que divida a n
-    for (int i = 1; i <= n; i++) {
+    for (int i = 2; i < n; i++) {
       if (n % i == 0) {
-        veces++;
         System.out.println("El número " + n + " es divisible por " + i);
-      }
-
-      if (veces > 2) {
         esPrimo = false;
         // "break" es un ciclo (for, while) se utiliza
         // para finalizarlo.
