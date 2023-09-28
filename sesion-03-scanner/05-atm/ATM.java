@@ -14,6 +14,5 @@ public class ATM {
   public static void main(String... args) {
     Tarjeta tarjeta = new Tarjeta("1234", 5000000);
 
-    // ...
   }
 }
