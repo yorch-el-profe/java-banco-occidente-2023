@@ -15,4 +15,8 @@ public class Gerente extends Empleado {
     this.bono = bono;
   }
 
+  @Override
+  public double calcularSueldo() {
+    return super.getSueldoBase() + bono;
+  }
 }

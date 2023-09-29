@@ -1,5 +1,5 @@
 
-public class Empleado {
+public abstract class Empleado {
   private String nombre;
   private double sueldoBase;
 
@@ -24,7 +24,5 @@ public class Empleado {
     this.sueldoBase = sueldoBase;
   }
 
-  public double calcularSueldo() {
-    return 0;
-  }
+  public abstract double calcularSueldo();
 }

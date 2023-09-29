@@ -24,4 +24,9 @@ public class Vendedor extends Empleado {
   public void setVentas(int ventas) {
     this.ventas = ventas;
   }
+
+  @Override
+  public double calcularSueldo() {
+    return super.getSueldoBase() + (comision * ventas);
+  }
 }
