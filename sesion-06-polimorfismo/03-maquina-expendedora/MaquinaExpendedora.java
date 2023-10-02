@@ -66,7 +66,8 @@ public class MaquinaExpendedora {
       System.out.println("\nElige una opción del menu:"
           + "\n1. Comprar un producto"
           + "\n2. Reporte de productos disponibles"
-          + "\n3. Salir");
+          + "\n3. Reporte de ventas"
+          + "\n4. Salir");
 
       int opcion = sc.nextInt();
       sc.nextLine();
