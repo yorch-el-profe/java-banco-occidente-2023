@@ -13,7 +13,15 @@ import java.util.List;
  * Una lista es una secuencia de "nodos" en la cual se almacenan valores
  * y no tiene un tamaño determinado.
  * 
- * (10.4) -> (50.643) -> (30) -> (-1.234) -> null
+ * (10.4) -> (50.643) -> (30) -> (2.3848) -> null
+ * 
+ * 
+ * Time Complexity:
+ * add() -> O(n)
+ * remove() -> O(n)
+ * get():
+ *  LinkedList: O(n)
+ *  ArrayList: O(1)
  */
 
 public class Listas {
