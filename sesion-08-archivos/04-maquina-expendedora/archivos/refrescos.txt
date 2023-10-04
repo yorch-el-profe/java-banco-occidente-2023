@@ -1,0 +1,4 @@
+P200|Coca-Cola|4500|Cola
+P201|Pepsi|4500|Cola
+P202|Sprite|4000|Limón
+P203|Postobon|2500|Manzana

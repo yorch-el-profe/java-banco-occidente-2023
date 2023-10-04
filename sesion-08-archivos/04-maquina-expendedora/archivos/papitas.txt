@@ -1,0 +1,4 @@
+P100|Margaritas|2000|Pollo|30
+P101|Margaritas|2000|Sal|30
+P102|Super Ricas|2200|BBQ|30
+P103|Super Ricas|2100|Natural|30
