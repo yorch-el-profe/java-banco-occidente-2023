@@ -17,14 +17,16 @@ public class MaquinaExpendedora {
 
   public MaquinaExpendedora() {
     productos = new LinkedList<Producto>();
-    cargarArchivo("./archivos/papitas.txt", PAPITAS);
-    cargarArchivo("./archivos/pastelitos.txt", PASTELITOS);
-    cargarArchivo("./archivos/refrescos.txt", REFRESCOS);
+
+    // Al iniciar la máquina expendedora cargamos los
+    cargarArchivo("papitas.txt", PAPITAS);
+    cargarArchivo("pastelitos.txt", PASTELITOS);
+    cargarArchivo("refrescos.txt", REFRESCOS);
   }
 
   private void cargarArchivo(String archivo, String tipo) {
     try {
-      FileReader reader = new FileReader(archivo, Charset.forName("UTF-8"));
+      FileReader reader = new FileReader("./archivos/" + archivo, Charset.forName("UTF-8"));
       BufferedReader bufferedReader = new BufferedReader(reader);
 
       String linea;
@@ -62,91 +64,81 @@ public class MaquinaExpendedora {
     }
   }
 
-  /*
-   * public boolean venta(String codigo) {
-   * for (int i = 0; i < productos.length; i++) {
-   * Producto producto = productos[i];
-   * 
-   * if (producto != null && producto.getCodigo().equals(codigo)) {
-   * productos[i] = null;
-   * return true;
-   * }
-   * }
-   * 
-   * return false;
-   * }
-   * 
-   * public void reporteProductos() {
-   * int papitas = 0;
-   * int refrescos = 0;
-   * int pastelitos = 0;
-   * int otros = 0;
-   * 
-   * for (Producto producto : productos) {
-   * if (producto == null) {
-   * // Cuando for tiene "continue"
-   * // salta a la siguiente iteración
-   * continue;
-   * }
-   * 
-   * if (producto instanceof Papitas) {
-   * papitas++;
-   * } else if (producto instanceof Refresco) {
-   * refrescos++;
-   * } else if (producto instanceof Pastelito) {
-   * pastelitos++;
-   * } else {
-   * otros++;
-   * }
-   * }
-   * 
-   * System.out.println("\nReporte");
-   * System.out.println("Papitas: " + papitas);
-   * System.out.println("Refrescos: " + refrescos);
-   * System.out.println("Pastelitos: " + pastelitos);
-   * System.out.println("Otros: " + otros);
-   * }
-   * 
-   * public static void main(String... args) {
-   * MaquinaExpendedora maquina = new MaquinaExpendedora();
-   * Scanner sc = new Scanner(System.in);
-   * boolean continuar = true;
-   * 
-   * do {
-   * System.out.println("\nElige una opción del menu:"
-   * + "\n1. Comprar un producto"
-   * + "\n2. Reporte de productos disponibles"
-   * + "\n3. Reporte de ventas"
-   * + "\n4. Salir");
-   * 
-   * int opcion = sc.nextInt();
-   * sc.nextLine();
-   * 
-   * switch (opcion) {
-   * case 1:
-   * System.out.println("\nIngresa el código del producto:");
-   * String codigo = sc.nextLine();
-   * boolean hizoVenta = maquina.venta(codigo);
-   * 
-   * if (!hizoVenta) {
-   * System.out.println("\n❌ Producto no encontrado...");
-   * } else {
-   * System.out.println("\n✅ Producto vendido :)");
-   * }
-   * break;
-   * 
-   * case 2:
-   * maquina.reporteProductos();
-   * break;
-   * 
-   * default:
-   * continuar = false;
-   * }
-   * } while (continuar);
-   * }
-   */
+  public boolean venta(String codigo) {
+    for (Producto producto : productos) {
+      if (producto.getCodigo().equals(codigo)) {
+        productos.remove(producto);
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public void reporteProductos() {
+    int papitas = 0;
+    int refrescos = 0;
+    int pastelitos = 0;
+    int otros = 0;
+
+    for (Producto producto : productos) {
+      if (producto == null) {
+        continue;
+      }
+
+      if (producto instanceof Papitas) {
+        papitas++;
+      } else if (producto instanceof Refresco) {
+        refrescos++;
+      } else if (producto instanceof Pastelito) {
+        pastelitos++;
+      } else {
+        otros++;
+      }
+    }
+
+    System.out.println("\nReporte");
+    System.out.println("Papitas: " + papitas);
+    System.out.println("Refrescos: " + refrescos);
+    System.out.println("Pastelitos: " + pastelitos);
+    System.out.println("Otros: " + otros);
+  }
 
   public static void main(String... args) {
     MaquinaExpendedora maquina = new MaquinaExpendedora();
+    Scanner sc = new Scanner(System.in);
+    boolean continuar = true;
+
+    do {
+      System.out.println("\nElige una opción del menu:"
+          + "\n1. Comprar un producto"
+          + "\n2. Reporte de productos disponibles"
+          + "\n3. Reporte de ventas"
+          + "\n4. Salir");
+
+      int opcion = sc.nextInt();
+      sc.nextLine();
+
+      switch (opcion) {
+        case 1:
+          System.out.println("\nIngresa el código del producto:");
+          String codigo = sc.nextLine();
+          boolean hizoVenta = maquina.venta(codigo);
+
+          if (!hizoVenta) {
+            System.out.println("\n❌ Producto no encontrado...");
+          } else {
+            System.out.println("\n✅ Producto vendido :)");
+          }
+          break;
+
+        case 2:
+          maquina.reporteProductos();
+          break;
+
+        default:
+          continuar = false;
+      }
+    } while (continuar);
   }
 }

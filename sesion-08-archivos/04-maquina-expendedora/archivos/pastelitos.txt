@@ -1,3 +1,4 @@
 P300|Ramo|2500|Chocolate|N
 P301|Gansito|1500|Chocolate|Y
 P302|Chocoso|1500|Chocolate|N
+P303|Random|2000|Vainilla|N
