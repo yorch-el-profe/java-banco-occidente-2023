@@ -1,17 +1,19 @@
 import java.util.Scanner;
 import java.util.List;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 public class MaquinaExpendedora {
   private final String PAPITAS = "Papitas";
   private final String PASTELITOS = "Pastelitos";
   private final String REFRESCOS = "Refrescos";
+  private final String UTF_8 = "UTF-8";
 
   private List<Producto> productos;
 
@@ -26,7 +28,7 @@ public class MaquinaExpendedora {
 
   private void cargarArchivo(String archivo, String tipo) {
     try {
-      FileReader reader = new FileReader("./archivos/" + archivo, Charset.forName("UTF-8"));
+      FileReader reader = new FileReader("./archivos/" + archivo, Charset.forName(UTF_8));
       BufferedReader bufferedReader = new BufferedReader(reader);
 
       String linea;
@@ -79,29 +81,35 @@ public class MaquinaExpendedora {
     int papitas = 0;
     int refrescos = 0;
     int pastelitos = 0;
-    int otros = 0;
 
     for (Producto producto : productos) {
-      if (producto == null) {
-        continue;
-      }
-
       if (producto instanceof Papitas) {
         papitas++;
       } else if (producto instanceof Refresco) {
         refrescos++;
-      } else if (producto instanceof Pastelito) {
-        pastelitos++;
       } else {
-        otros++;
+        pastelitos++;
       }
     }
 
-    System.out.println("\nReporte");
-    System.out.println("Papitas: " + papitas);
-    System.out.println("Refrescos: " + refrescos);
-    System.out.println("Pastelitos: " + pastelitos);
-    System.out.println("Otros: " + otros);
+    try {
+      FileWriter writer = new FileWriter("./reportes/productos-disponibles.txt", Charset.forName(UTF_8));
+      BufferedWriter bufferedWriter = new BufferedWriter(writer);
+
+      bufferedWriter.write("Reporte de Productos Disponibles");
+      bufferedWriter.newLine();
+      bufferedWriter.write("Papitas: " + papitas);
+      bufferedWriter.newLine();
+      bufferedWriter.write("Refrescos: " + refrescos);
+      bufferedWriter.newLine();
+      bufferedWriter.write("Pastelitos: " + pastelitos);
+
+      System.out.println("\n✅ Reporte generado :)");
+
+      bufferedWriter.close();
+    } catch (IOException e) {
+      System.out.println("Error generando reporte de productos");
+    }
   }
 
   public static void main(String... args) {
